@@ -37,30 +37,30 @@ function App() {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-6 text-center">EEG Аналізатор</h1>
+        <div className="app-container">
+            <h1 className="app-title">EEG Аналізатор</h1>
 
-            <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 mb-6">
-                <h2 className="text-xl font-semibold mb-4">Завантажте CSV файл з даними EEG</h2>
+            <div className="file-upload-container">
+                <h2 className="file-upload-title">Завантажте CSV файл з даними EEG</h2>
                 <FileUpload onUpload={handleFileUpload} disabled={loading} />
 
                 {loading && (
-                    <div className="mt-4 text-center">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent"></div>
-                        <p className="mt-2">Обробка даних...</p>
+                    <div className="loading">
+                        <div className="spinner"></div>
+                        <p className="loading-text">Обробка даних...</p>
                     </div>
                 )}
 
                 {error && (
-                    <div className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    <div className="error-message">
                         <p>{error}</p>
                     </div>
                 )}
             </div>
 
-            {results && (
-                <div className="bg-white rounded-lg shadow-md p-6">
-                    <h2 className="text-xl font-semibold mb-4">Результати аналізу</h2>
+            {results && !loading && (
+                <div className="results-container">
+                    <h2 className="results-title">Результати аналізу</h2>
                     <ResultsTable data={results} />
                 </div>
             )}
